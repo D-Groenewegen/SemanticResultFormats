@@ -138,7 +138,7 @@ class SRFIncoming extends SMWResultPrinter {
 		}
 
 		if ( $this->params['template'] ) {
-			// Beautify class selector		
+			// Beautify class selector
 			$class = 'srf-incoming ' . str_replace(
 				" ",
 				"-",
