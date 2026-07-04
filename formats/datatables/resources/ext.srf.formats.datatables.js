@@ -411,7 +411,7 @@
 					// we retrieve more than "length"
 					// expected by datatables, so return the
 					// sliced result
-					json.data = json.data.slice(0, data.datalength);
+					json.data = json.data.slice(0, json.datalength);
 					json.searchPanes = {
 						options: searchPanesOptions,
 					};
@@ -758,7 +758,7 @@
 
 			var conf = $.extend(options, {
 				columnDefs: columnDefs,
-				language: _datatables.oLanguage,
+				language: data.language || _datatables.oLanguage,
 				order: order,
 				search: {
 					caseInsensitive: table.data('nocase'),
@@ -896,7 +896,7 @@
 						_datatables.callApi(
 							$.extend(payloadData, {
 								datatableData,
-								cacheKey,
+								cacheKey: thisCacheKey,
 							}),
 							callback,
 							preloadData,

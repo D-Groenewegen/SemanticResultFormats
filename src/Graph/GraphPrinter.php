@@ -2,7 +2,7 @@
 
 namespace SRF\Graph;
 
-use Html;
+use MediaWiki\Html\Html;
 use MediaWiki\MediaWikiServices;
 use SMW\Query\PrintRequest;
 use SMW\Query\QueryResult;
@@ -98,7 +98,7 @@ class GraphPrinter extends ResultPrinter {
 	/**
 	 * @see ResultPrinter::handleParameters()
 	 */
-	protected function handleParameters( array $params, $outputmode ) {
+	protected function handleParameters( array $params, $outputmode ): void {
 		parent::handleParameters( $params, $outputmode );
 
 		$this->options = new GraphOptions( $params );
@@ -151,7 +151,7 @@ class GraphPrinter extends ResultPrinter {
 		}
 
 		// iterate query result and create SRF\GraphNodes
-		while ( $row = $res->getNext() ) {
+		while ( $row = $res->getNext() ) { // phpcs:ignore Generic.CodeAnalysis.AssignmentInCondition.FoundInWhileCondition
 			$this->processResultRow( $row );
 		}
 
@@ -186,7 +186,6 @@ class GraphPrinter extends ResultPrinter {
 	 * @since 3.1
 	 *
 	 * @param ResultArray[] $row
-	 *
 	 */
 	protected function processResultRow( array $row ) {
 		$node = null;
@@ -209,15 +208,16 @@ class GraphPrinter extends ResultPrinter {
 				|| $isPageType
 				|| $request->isMode( PrintRequest::PRINT_CHAIN );
 
-			$showGraphFieldsPages = $this->options->showGraphFieldsPages() === 'yes';
+			$showGraphFieldsPages = $this->options->showGraphFieldsPages();
 			$showGraphFields = $this->options->showGraphFields();
 
-			while ( ( $object = $result_array->getNextDataValue() ) !== false ) {
+			while ( ( $object = $result_array->getNextDataValue() ) !== false ) { // phpcs:ignore Generic.CodeAnalysis.AssignmentInCondition.FoundInWhileCondition
 				$hasProperty = $object->getProperty();
-				if ( $object instanceof \SMW\DataValues\StringValue ) {
-					$objectText = $object->getShortWikiText();
+
+				if ( $isPageType ) {
+					$objectText = $object->getDisplayTitle() ?: $object->getWikiValue();
 				} else {
-					$objectText = $object->getDisplayTitle();
+					$objectText = $object->getWikiValue();
 				}
 
 				$includeAsEdge = !$showGraphFields || $isPageType || $request->isMode( PrintRequest::PRINT_CHAIN );
@@ -254,22 +254,24 @@ class GraphPrinter extends ResultPrinter {
 					continue;
 				}
 
-				// Handle field
+				// Handle field in info box for node
 				if ( $showGraphFieldsPages && $includeAsField ) {
 					if ( $hasProperty || !$isPageType ) {
-						// non-page or property field
-						if ( $pageTypeSeen !== 2 && !$isPageType ) {
-							$fields[] = [
-								'name' => $label,
-								'value' => $objectText,
-								'type' => $type,
-								'page' => $canonicalLabel,
-							];
-						} elseif ( $pageTypeSeen !== 2 && $isPageType ) {
+						// if is Page type, only add if seen more than once
+						if ( $isPageType && $pageTypeSeen > 2 ) {
 							$fields[] = [
 								'name' => $label,
 								'value' => $object->getDisplayTitle(),
 								'valueLink' => $object->getShortWikiText(),
+								'type' => $type,
+								'page' => $canonicalLabel,
+							];
+						}
+						// if is not Page type, always add
+						if ( !$isPageType ) {
+							$fields[] = [
+								'name' => $label,
+								'value' => $objectText,
 								'type' => $type,
 								'page' => $canonicalLabel,
 							];
@@ -316,7 +318,7 @@ class GraphPrinter extends ResultPrinter {
 	 *
 	 * @return array of IParamDefinition|array
 	 */
-	public function getParamDefinitions( array $definitions ) {
+	public function getParamDefinitions( array $definitions ): array {
 		$params = parent::getParamDefinitions( $definitions );
 
 		$params['graphname'] = [
@@ -410,9 +412,9 @@ class GraphPrinter extends ResultPrinter {
 		];
 
 		$params['graphfieldspages'] = [
-			'default' => 'no',
+			'default' => false,
 			'message' => 'srf-paramdesc-graphfieldspages',
-			'type' => 'string'
+			'type' => 'boolean'
 		];
 
 		return $params;

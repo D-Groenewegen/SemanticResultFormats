@@ -76,15 +76,15 @@ node [fontsize=10, fontname="Verdana"];
 edge [fontsize=10, fontname="Verdana"];
 size="100";node [shape=rect];rankdir=LR;
 "Team:Alpha" [label = <
-<table border="0" cellborder="0" cellspacing="1" columns="*" rows="*">
-<tr><td colspan="2" href="[[Team:Alpha]]">Alpha</td></tr><hr/>
-<tr><td align="left" href="[[Property:Rating]]">Rated as</td><td align="right">10</td></tr>
+<table color="white" border="0" cellborder="0" cellspacing="2" columns="*" rows="*">
+<tr><td colspan="2" href="[[Team:Alpha]]">Alpha</td></tr>
+<tr><td colspan="2" border="1" color="black" sides="T" cellpadding="0" cellspacing="0"></td></tr>\n<tr><td align="right" href="[[Property:Rating]]">Rated as: </td><td  align="left">10</td></tr>
 </table>
 >, tooltip = "Alpha"];
 "Team:Beta" [label = <
-<table border="0" cellborder="0" cellspacing="1" columns="*" rows="*">
-<tr><td colspan="2" href="[[Team:Beta]]">Beta</td></tr><hr/>
-<tr><td align="left" href="[[Property:Rating]]">Rated as</td><td align="right">20</td></tr>
+<table color="white" border="0" cellborder="0" cellspacing="2" columns="*" rows="*">
+<tr><td colspan="2" href="[[Team:Beta]]">Beta</td></tr>
+<tr><td colspan="2" border="1" color="black" sides="T" cellpadding="0" cellspacing="0"></td></tr>\n<tr><td align="right" href="[[Property:Rating]]">Rated as: </td><td  align="left">20</td></tr>
 </table>
 >, tooltip = "Beta"];
 "Person:Alexander Gesinn" -> "Team:Alpha" [label="Casted",fontcolor=black,arrowhead=diamond,color=black];
@@ -110,11 +110,11 @@ node [fontsize=10, fontname="Verdana"];
 edge [fontsize=10, fontname="Verdana"];
 size="100";node [shape=rect];rankdir=LR;
 "Team:Gamma" [label = <
-<table border="0" cellborder="0" cellspacing="1" columns="*" rows="*">
-<tr><td colspan="2" href="[[Team:Gamma]]">Gamma</td></tr><hr/>
-<tr><td align="left" href="[[Property:Main Category]]">Main Category</td><td align="left" href="[[Team]]">Team</td></tr>
-<tr><td align="left" href="[[Property:Casted]]">Casted</td><td align="left" href="[[Sebastian Schmid]]">Sebastian Schmid</td></tr>
-<tr><td align="left" href="[[Property:Team Code]]">Team Code</td><td align="left">ES</td></tr>
+<table color="white" border="0" cellborder="0" cellspacing="2" columns="*" rows="*">
+<tr><td colspan="2" href="[[Team:Gamma]]">Gamma</td></tr>
+<tr><td colspan="2" border="1" color="black" sides="T" cellpadding="0" cellspacing="0"></td></tr>\n<tr><td align="right" href="[[Property:Main Category]]">Main Category: </td><td  align="left" href="[[Team]]">Team</td></tr>
+<tr><td align="right" href="[[Property:Casted]]">Casted: </td><td  align="left" href="[[Sebastian Schmid]]">Sebastian Schmid</td></tr>
+<tr><td align="right" href="[[Property:Team Code]]">Team Code: </td><td  align="left">ES</td></tr>
 </table>
 >, tooltip = "Gamma"];
 }
@@ -167,43 +167,43 @@ node [fontsize=10, fontname="Verdana"];
 edge [fontsize=10, fontname="Verdana"];
 size="100";node [shape=rect];rankdir=LR;
 "Team:Delta" [label = <
-<table border="0" cellborder="0" cellspacing="1" columns="*" rows="*">
-<tr><td colspan="2" href="[[Team:Delta]]">Delta</td></tr><hr/>
-<tr><td align="left" href="[[Property:Main Category]]">Main Category</td><td align="left" href="[[Team]]">Team</td></tr>
-<tr><td align="left" href="[[Property:Casted]]">Casted</td><td align="left" href="[[Sebastian Schmid]]">Sebastian Schmid</td></tr>
-<tr><td align="left" href="[[Property:Team Code]]">Team Code</td><td align="left">ES</td></tr>
+<table color="white" border="0" cellborder="0" cellspacing="2" columns="*" rows="*">
+<tr><td colspan="2" href="[[Team:Delta]]">Delta</td></tr>
+<tr><td colspan="2" border="1" color="black" sides="T" cellpadding="0" cellspacing="0"></td></tr>\n<tr><td align="right" href="[[Property:Main Category]]">Main Category: </td><td  align="left" href="[[Team]]">Team</td></tr>
+<tr><td align="right" href="[[Property:Casted]]">Casted: </td><td  align="left" href="[[Sebastian Schmid]]">Sebastian Schmid</td></tr>
+<tr><td align="right" href="[[Property:Team Code]]">Team Code: </td><td  align="left">ES</td></tr>
 </table>
 >, tooltip = "Delta"];
 "Team:Epsilon" [label = <
-<table border="0" cellborder="0" cellspacing="1" columns="*" rows="*">
-<tr><td colspan="2" href="[[Team:Epsilon]]">Epsilon</td></tr><hr/>
-<tr><td align="left" href="[[Property:Main Category]]">Main Category</td><td align="left" href="[[Team]]">Team</td></tr>
-<tr><td align="left" href="[[Property:Casted]]">Casted</td><td align="left" href="[[Sebastian Schmid]]">Sebastian Schmid</td></tr>
-<tr><td align="left" href="[[Property:Team Code]]">Team Code</td><td align="left">ES</td></tr>
+<table color="white" border="0" cellborder="0" cellspacing="2" columns="*" rows="*">
+<tr><td colspan="2" href="[[Team:Epsilon]]">Epsilon</td></tr>
+<tr><td colspan="2" border="1" color="black" sides="T" cellpadding="0" cellspacing="0"></td></tr>\n<tr><td align="right" href="[[Property:Main Category]]">Main Category: </td><td  align="left" href="[[Team]]">Team</td></tr>
+<tr><td align="right" href="[[Property:Casted]]">Casted: </td><td  align="left" href="[[Sebastian Schmid]]">Sebastian Schmid</td></tr>
+<tr><td align="right" href="[[Property:Team Code]]">Team Code: </td><td  align="left">ES</td></tr>
 </table>
 >, tooltip = "Epsilon"];
 "Team:Zeta" [label = <
-<table border="0" cellborder="0" cellspacing="1" columns="*" rows="*">
-<tr><td colspan="2" href="[[Team:Zeta]]">Zeta</td></tr><hr/>
-<tr><td align="left" href="[[Property:Main Category]]">Main Category</td><td align="left" href="[[Team]]">Team</td></tr>
-<tr><td align="left" href="[[Property:Casted]]">Casted</td><td align="left" href="[[Sebastian Schmid]]">Sebastian Schmid</td></tr>
-<tr><td align="left" href="[[Property:Team Code]]">Team Code</td><td align="left">ES</td></tr>
+<table color="white" border="0" cellborder="0" cellspacing="2" columns="*" rows="*">
+<tr><td colspan="2" href="[[Team:Zeta]]">Zeta</td></tr>
+<tr><td colspan="2" border="1" color="black" sides="T" cellpadding="0" cellspacing="0"></td></tr>\n<tr><td align="right" href="[[Property:Main Category]]">Main Category: </td><td  align="left" href="[[Team]]">Team</td></tr>
+<tr><td align="right" href="[[Property:Casted]]">Casted: </td><td  align="left" href="[[Sebastian Schmid]]">Sebastian Schmid</td></tr>
+<tr><td align="right" href="[[Property:Team Code]]">Team Code: </td><td  align="left">ES</td></tr>
 </table>
 >, tooltip = "Zeta"];
 "Team:Eta" [label = <
-<table border="0" cellborder="0" cellspacing="1" columns="*" rows="*">
-<tr><td colspan="2" href="[[Team:Eta]]">Eta</td></tr><hr/>
-<tr><td align="left" href="[[Property:Main Category]]">Main Category</td><td align="left" href="[[Team]]">Team</td></tr>
-<tr><td align="left" href="[[Property:Casted]]">Casted</td><td align="left" href="[[Sebastian Schmid]]">Sebastian Schmid</td></tr>
-<tr><td align="left" href="[[Property:Team Code]]">Team Code</td><td align="left">ES</td></tr>
+<table color="white" border="0" cellborder="0" cellspacing="2" columns="*" rows="*">
+<tr><td colspan="2" href="[[Team:Eta]]">Eta</td></tr>
+<tr><td colspan="2" border="1" color="black" sides="T" cellpadding="0" cellspacing="0"></td></tr>\n<tr><td align="right" href="[[Property:Main Category]]">Main Category: </td><td  align="left" href="[[Team]]">Team</td></tr>
+<tr><td align="right" href="[[Property:Casted]]">Casted: </td><td  align="left" href="[[Sebastian Schmid]]">Sebastian Schmid</td></tr>
+<tr><td align="right" href="[[Property:Team Code]]">Team Code: </td><td  align="left">ES</td></tr>
 </table>
 >, tooltip = "Eta"];
 "Team:Theta" [label = <
-<table border="0" cellborder="0" cellspacing="1" columns="*" rows="*">
-<tr><td colspan="2" href="[[Team:Theta]]">Theta</td></tr><hr/>
-<tr><td align="left" href="[[Property:Main Category]]">Main Category</td><td align="left" href="[[Team]]">Team</td></tr>
-<tr><td align="left" href="[[Property:Casted]]">Casted</td><td align="left" href="[[Sebastian Schmid]]">Sebastian Schmid</td></tr>
-<tr><td align="left" href="[[Property:Team Code]]">Team Code</td><td align="left">ES</td></tr>
+<table color="white" border="0" cellborder="0" cellspacing="2" columns="*" rows="*">
+<tr><td colspan="2" href="[[Team:Theta]]">Theta</td></tr>
+<tr><td colspan="2" border="1" color="black" sides="T" cellpadding="0" cellspacing="0"></td></tr>\n<tr><td align="right" href="[[Property:Main Category]]">Main Category: </td><td  align="left" href="[[Team]]">Team</td></tr>
+<tr><td align="right" href="[[Property:Casted]]">Casted: </td><td  align="left" href="[[Sebastian Schmid]]">Sebastian Schmid</td></tr>
+<tr><td align="right" href="[[Property:Team Code]]">Team Code: </td><td  align="left">ES</td></tr>
 </table>
 >, tooltip = "Theta"];
 "Solar &amp; Hydro" -> "Team:Delta" [label="Part of Team",fontcolor=black,arrowhead=diamond,color=black];
@@ -359,5 +359,59 @@ WRAPPED0
 	 */
 	public function testBuildGraph( array $params, $expected ) {
 		$this->assertEquals( $expected, self::graph( $params )->getGraph() );
+	}
+
+	/**
+	 * @covers \SRF\Graph\GraphFormatter::buildGraph()
+	 *
+	 * Covers lines 114-115: when a node has fields but an empty label, the node ID is
+	 * word-wrapped and used as the table header instead of a label.
+	 */
+	public function testBuildGraphUsesNodeIdAsLabelWhenLabelIsEmpty(): void {
+		$params = self::BASE_PARAMS + [ 'graphfields' => false, 'graphfieldspages' => 'no' ];
+		// Override nodelabel so displaytitle logic is skipped; use a non-displaytitle value
+		$params['nodelabel'] = '';
+		$formatter = new GraphFormatter( new GraphOptions( $params ) );
+
+		$node = new GraphNode( 'Team:Iota' );
+		// Do NOT call setLabel — leaves $label as null/empty.
+		$node->addField( 'Rating', '5', '_num', 'Rating', null );
+
+		$formatter->buildGraph( [ $node ] );
+		$dot = $formatter->getGraph();
+
+		// The node ID should appear as the table header href target and as the cell content.
+		$this->assertStringContainsString( 'href="[[Team:Iota]]"', $dot );
+		$this->assertStringContainsString( 'Team:Iota', $dot );
+	}
+
+	/**
+	 * @covers \SRF\Graph\GraphFormatter::getGraphLegend()
+	 *
+	 * Covers line 257: the color counter resets to 0 after cycling through all 14
+	 * graphColors entries, so a 15th predicate reuses the first color.
+	 */
+	public function testGetGraphLegendResetsColorCountAfterExhaustingPalette(): void {
+		$params = self::BASE_PARAMS + [ 'graphfields' => false, 'graphfieldspages' => 'no' ];
+		$formatter = new GraphFormatter( new GraphOptions( $params ) );
+
+		// Build 15 distinct predicates so the palette wraps around.
+		$node = new GraphNode( 'Team:Kappa' );
+		$node->setLabel( 'Kappa' );
+		for ( $i = 1; $i <= 15; $i++ ) {
+			$node->addParentNode( "Predicate$i", "Object$i" );
+		}
+
+		$formatter->buildGraph( [ $node ] );
+		$legend = $formatter->getGraphLegend();
+
+		// The first color "black" must appear twice: once for Predicate1 and once for Predicate15.
+		$this->assertGreaterThanOrEqual(
+			2,
+			substr_count( $legend, 'color: black' ),
+			'Expected color "black" to be reused after palette exhaustion'
+		);
+		// Predicate15 wraps back to the first color slot.
+		$this->assertStringContainsString( 'black: Predicate15', $legend );
 	}
 }

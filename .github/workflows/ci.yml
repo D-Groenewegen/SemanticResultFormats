@@ -11,53 +11,33 @@ jobs:
 
   test:
 
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     continue-on-error: ${{ matrix.experimental }}
 
     strategy:
       matrix:
         include:
-          - mediawiki_version: '1.39'
-            smw_version: 5.1.0
-            php_version: 8.1
+          - mediawiki_version: '1.43'
+            smw_version: 7.0.0
+            php_version: 8.2
             mm_version: 6.0.1
             database_type: mysql
             database_image: "mariadb:11.2"
             coverage: false
             experimental: false
-          - mediawiki_version: '1.40'
-            smw_version: 5.1.0
-            php_version: 8.1
-            mm_version: 6.0.1
+          - mediawiki_version: '1.43'
+            smw_version: 7.0.0
+            pf_version: 5.9
+            sfs_version: 4.0.0-beta
+            php_version: 8.3
+            mm_version: 6.0.2
             database_type: mysql
             database_image: "mariadb:11.2"
             coverage: true
             experimental: false
-          - mediawiki_version: '1.41'
-            smw_version: 5.1.0
-            pf_version: 5.9
-            sfs_version: dev-master
-            php_version: 8.1
-            mm_version: 6.0.1
-            database_type: mysql
-            database_image: "mariadb:11.2"
-            coverage: false
-            experimental: false
-          - mediawiki_version: '1.42'
-            smw_version: 5.1.0
-            pf_version: 5.9
-            sfs_version: dev-master
-            php_version: 8.1
-            mm_version: 6.0.1
-            database_type: mysql
-            database_image: "mariadb:11.2"
-            coverage: false
-            experimental: false
-          - mediawiki_version: '1.43.1'
-            smw_version: dev-master
-            pf_version: 5.9
-            sfs_version: dev-master
-            php_version: 8.1
+          - mediawiki_version: '1.45'
+            smw_version: 7.0.0
+            php_version: 8.3
             mm_version: 6.0.1
             database_type: mysql
             database_image: "mariadb:11.2"
@@ -72,9 +52,8 @@ jobs:
       PHP_VERSION: ${{ matrix.php_version }}
       DB_TYPE: ${{ matrix.database_type }}
       DB_IMAGE: ${{ matrix.database_image }}
-      MM_VERSION: ${{ matrix.mm_version }} 
+      MM_VERSION: ${{ matrix.mm_version }}
 
-      
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -92,8 +71,12 @@ jobs:
         run: make ci-coverage
         if: matrix.coverage == true
 
+      - name: Run Phan static analysis
+        run: make install composer-phan
+        if: matrix.coverage == true
+
       - name: Upload code coverage
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: coverage/php/coverage.xml
