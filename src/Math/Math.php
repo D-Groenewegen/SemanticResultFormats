@@ -10,7 +10,8 @@ use SMW\Query\ResultPrinters\ResultPrinter;
 use SMWDataItem;
 
 /**
- * Various mathematical functions - sum, product, average, min, max, median, variance, samplevariance, samplestandarddeviation, standarddeviation, range, quartillower, quartilupper, quartillower.exc, quartilupper.exc, interquartilerange, interquartilerange.exc, mode and interquartilemean
+ * Result printer for the math result formats. The statistical functions
+ * themselves live in MathFormats.
  *
  * @license GPL-3.0-or-later
  *
@@ -19,231 +20,6 @@ use SMWDataItem;
  * @author Nathan Yergler
  * @author Florian Breitenlacher
  */
-
-class MathFormats {
-	public static function maxFunction( array $numbers ) {
-		// result
-		return max( $numbers );
-	}
-
-	public static function minFunction( array $numbers ) {
-		// result
-		return min( $numbers );
-	}
-
-	public static function sumFunction( array $numbers ) {
-		// result
-		return array_sum( $numbers );
-	}
-
-	public static function productFunction( array $numbers ) {
-		// result
-		return array_product( $numbers );
-	}
-
-	public static function averageFunction( array $numbers ) {
-		// result
-		return array_sum( $numbers ) / count( $numbers );
-	}
-
-	public static function medianFunction( array $numbers ) {
-		sort( $numbers, SORT_NUMERIC );
-		// get position
-		$position = ( count( $numbers ) + 1 ) / 2 - 1;
-		// result
-		return ( $numbers[ceil( $position )] + $numbers[floor( $position )] ) / 2;
-	}
-
-	public static function varianceFunction( array $numbers ) {
-		// average
-		$average = self::averageFunction( $numbers );
-		// space
-		$space = null;
-		for ( $i = 0; $i < count( $numbers ); $i++ ) {
-			$space += pow( $numbers[$i], 2 );
-		}
-		// result
-		return ( $space / count( $numbers ) - pow( $average, 2 ) );
-	}
-
-	public static function samplevarianceFunction( array $numbers ) {
-		// average
-		$average = self::averageFunction( $numbers );
-		// space
-		$space = null;
-		for ( $i = 0; $i < count( $numbers ); $i++ ) {
-			$space += pow( ( $numbers[$i] - $average ), 2 );
-		}
-		// result
-		return ( $space / ( count( $numbers ) - 1 ) );
-	}
-
-	public static function standarddeviationFunction( array $numbers ) {
-		// average
-		$average = self::averageFunction( $numbers );
-		// space
-		$space = null;
-		for ( $i = 0; $i < count( $numbers ); $i++ ) {
-			$space += pow( ( $numbers[$i] - $average ), 2 );
-		}
-		// result
-		return sqrt( $space / ( count( $numbers ) - 1 ) );
-	}
-
-	public static function samplestandarddeviationFunction( array $numbers ) {
-		// average
-		$average = self::averageFunction( $numbers );
-		// space
-		$space = null;
-		for ( $i = 0; $i < count( $numbers ); $i++ ) {
-			$space += pow( $numbers[$i], 2 );
-		}
-		// result
-		return sqrt( $space / count( $numbers ) - pow( $average, 2 ) );
-	}
-
-	public static function rangeFunction( array $numbers ) {
-		// result
-		return ( max( $numbers ) - min( $numbers ) );
-	}
-
-	public static function quartillowerIncFunction( array $numbers ) {
-		sort( $numbers, SORT_NUMERIC );
-		// get position
-		$Q1_position = ( ( count( $numbers ) - 1 ) * 0.25 );
-		// check if position is between two numbers
-		if ( is_float( $Q1_position ) ) {
-			$Q1_position_y = floor( $Q1_position );
-			$Q1_position_x = ceil( $Q1_position );
-			// result
-			return ( $numbers[$Q1_position_y] + ( $numbers[$Q1_position_x] - $numbers[$Q1_position_y] ) * 0.25 );
-		} else {
-			// result
-			return $numbers[$Q1_position];
-		}
-	}
-
-	public static function quartilupperIncFunction( array $numbers ) {
-		sort( $numbers, SORT_NUMERIC );
-		// get position
-		$Q3_position = ( ( count( $numbers ) - 1 ) * 0.75 );
-		// check if position is between two numbers
-		if ( is_float( $Q3_position ) ) {
-			$Q3_position_y = floor( $Q3_position );
-			$Q3_position_x = ceil( $Q3_position );
-			// result
-			return ( $numbers[$Q3_position_y] + ( $numbers[$Q3_position_x] - $numbers[$Q3_position_y] ) * 0.75 );
-		} else {
-			// result
-			return $numbers[$Q3_position];
-		}
-	}
-
-	public static function quartillowerExcFunction( array $numbers ) {
-		sort( $numbers, SORT_NUMERIC );
-		// get position
-		$Q1_position = ( ( count( $numbers ) + 1 ) * 0.25 );
-		// check if position is between two numbers
-		if ( is_float( $Q1_position ) ) {
-			$Q1_position_y = floor( $Q1_position ) - 1;
-			$Q1_position_x = ceil( $Q1_position ) - 1;
-			// result
-			return ( $numbers[$Q1_position_y] + ( $numbers[$Q1_position_x] - $numbers[$Q1_position_y] ) * 0.75 );
-		} else {
-			// result
-			return $numbers[$Q1_position];
-		}
-	}
-
-	public static function quartilupperExcFunction( array $numbers ) {
-		sort( $numbers, SORT_NUMERIC );
-		// get position
-		$Q3_position = ( ( count( $numbers ) + 1 ) * 0.75 );
-		// check if position is between two numbers
-		if ( is_float( $Q3_position ) ) {
-			$Q3_position_y = floor( $Q3_position ) - 1;
-			$Q3_position_x = ceil( $Q3_position ) - 1;
-			// result
-			return ( $numbers[$Q3_position_y] + ( $numbers[$Q3_position_x] - $numbers[$Q3_position_y] ) * 0.25 );
-		} else {
-			// result
-			return $numbers[$Q3_position];
-		}
-	}
-
-	public static function interquartilerangeIncFunction( array $numbers ) {
-		// result
-		return self::quartilupperIncFunction( $numbers ) - self::quartillowerIncFunction( $numbers );
-	}
-
-	public static function interquartilerangeExcFunction( array $numbers ) {
-		// result
-		return self::quartilupperExcFunction( $numbers ) - self::quartillowerExcFunction( $numbers );
-	}
-
-	public static function modeFunction( array $numbers ) {
-		// array temp
-		$array_temp = [];
-		// convert array
-		for ( $i = 0; $i < count( $numbers ); $i++ ) {
-			$converted_value = strval( $numbers[$i] );
-			$array_temp += [ $i => $converted_value ];
-		}
-		$array_counted_values = array_count_values( $array_temp );
-		// max
-		$max = max( $array_counted_values );
-		// count
-		$count = null;
-		// filter
-		for ( $i = 0; $i < count( $array_counted_values ); $i++ ) {
-			if ( $array_counted_values[array_keys( $array_counted_values )[$i]] == $max ) {
-				$count += 1;
-			}
-		}
-		// check if there are more than one max
-		if ( $count == 1 ) {
-			// result
-			return $max;
-		}
-	}
-
-	public static function interquartilemeanFunction( array $numbers ) {
-		// sort numbers
-		sort( $numbers, SORT_NUMERIC );
-		// check if size of numbers is divisible by 4
-		if ( count( $numbers ) % 4 == 0 ) {
-			// split array into 4 groups (2D array)
-			$array_split = ( array_chunk( $numbers, count( $numbers ) / 4 ) );
-			// creating store_string
-			$store_string = null;
-			for ( $i = 0; $i < count( $array_split[1] ); $i++ ) {
-				$store_string += $array_split[1][$i];
-			}
-			for ( $i = 0; $i < count( $array_split[2] ); $i++ ) {
-				$store_string += $array_split[2][$i];
-			}
-			// result
-			return $store_string / ( count( $array_split[1] ) + count( $array_split[2] ) );
-		} else {
-			// get position of split
-			$position = count( $numbers ) / 4;
-			// remove values out of split
-			for ( $i = 0; $i < floor( $position ); $i++ ) {
-				unset( $numbers[$i] );
-				array_pop( $numbers );
-			}
-			// reset array keys
-			$store_array = array_merge( $numbers );
-			// add values
-			$store_values = null;
-			for ( $i = 1; $i < count( $store_array ) - 1; $i++ ) {
-				$store_values += $store_array[$i];
-			}
-			// result
-			return ( $store_values + ( ( ceil( $position ) - $position ) * ( $store_array[0] + $store_array[count( $store_array ) - 1] ) ) ) / ( $position * 2 );
-		}
-	}
-}
 
 class Math extends ResultPrinter {
 
@@ -254,7 +30,13 @@ class Math extends ResultPrinter {
 	public function getName() {
 		// Give grep a chance to find the usages:
 		// srf_printername_max, srf_printername_min, srf_printername_sum,
-		// srf_printername_product, srf_printername_average, srf_printername_median
+		// srf_printername_product, srf_printername_average, srf_printername_median,
+		// srf_printername_mode, srf_printername_range, srf_printername_variance,
+		// srf_printername_samplevariance, srf_printername_standarddeviation,
+		// srf_printername_samplestandarddeviation, srf_printername_quartillower,
+		// srf_printername_quartilupper, srf_printername_quartillower.exc,
+		// srf_printername_quartilupper.exc, srf_printername_interquartilerange,
+		// srf_printername_interquartilerange.exc, srf_printername_interquartilemean
 		return wfMessage( 'srf_printername_' . $this->mFormat )->text();
 	}
 

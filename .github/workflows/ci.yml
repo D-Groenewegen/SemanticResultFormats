@@ -18,7 +18,7 @@ jobs:
       matrix:
         include:
           - mediawiki_version: '1.43'
-            smw_version: 7.0.0
+            smw_version: 7.2.0
             php_version: 8.2
             mm_version: 6.0.1
             database_type: mysql
@@ -26,9 +26,9 @@ jobs:
             coverage: false
             experimental: false
           - mediawiki_version: '1.43'
-            smw_version: 7.0.0
+            smw_version: 7.2.0
             pf_version: 5.9
-            sfs_version: 4.0.0-beta
+            sfs_version: 5.0.0
             php_version: 8.3
             mm_version: 6.0.2
             database_type: mysql
@@ -36,11 +36,19 @@ jobs:
             coverage: true
             experimental: false
           - mediawiki_version: '1.45'
-            smw_version: 7.0.0
-            php_version: 8.3
+            smw_version: 7.2.0
+            php_version: 8.4
             mm_version: 6.0.1
             database_type: mysql
             database_image: "mariadb:11.2"
+            coverage: false
+            experimental: false
+          - mediawiki_version: '1.46'
+            smw_version: 7.2.0
+            php_version: 8.4
+            mm_version: 6.0.1
+            database_type: mysql
+            database_image: "mariadb:12.3"
             coverage: false
             experimental: false
 
@@ -53,6 +61,9 @@ jobs:
       DB_TYPE: ${{ matrix.database_type }}
       DB_IMAGE: ${{ matrix.database_image }}
       MM_VERSION: ${{ matrix.mm_version }}
+      # Run JS tests only for the coverage entry: keeps the JS toolchain off the
+      # other matrix legs, matching how PHP coverage is scoped to one leg too.
+      NODE_JS: ${{ matrix.coverage && '1' || '' }}
 
     steps:
       - name: Checkout
@@ -79,5 +90,9 @@ jobs:
         uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          files: coverage/php/coverage.xml
+          # Coverage files are written into the Docker volume mounted at
+          # build/coverage/ (see build/docker-compose-ci.yml), NOT at the
+          # repo root. Using the correct paths ensures Codecov applies the
+          # codecov.yml path fixes and resolves PHP paths correctly.
+          files: build/coverage/php/coverage.xml,build/coverage/js/clover.xml
         if: matrix.coverage == true
